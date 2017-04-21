@@ -1,0 +1,7 @@
+/public/assets*
+/tmp
+
+.env.*
+.DS_Store
+
+.byebug_history
