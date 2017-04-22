@@ -3,3 +3,6 @@
 #
 # Example:
 # get '/hello', to: ->(env) { [200, {}, ['Hello from Hanami!']] }
+
+post '/auth/sign_in', to: 'auth#sign_in'
+post '/auth/sign_up', to: 'auth#sign_up'
