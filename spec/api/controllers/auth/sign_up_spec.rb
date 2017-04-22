@@ -13,7 +13,7 @@ describe Api::Controllers::Auth::SignUp do
     }
   end
 
-  before do
+  after do
     UserRepository.new.clear
   end
 

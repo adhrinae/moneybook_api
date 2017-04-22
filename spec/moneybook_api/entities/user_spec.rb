@@ -21,4 +21,8 @@ describe User do
   it "show_info doesn't include password_digest" do
     @user.show_info.wont_include(:password_digest)
   end
+
+  it "validates given password is equal to user's password" do
+    assert @user.valid_password?(params[:password])
+  end
 end
