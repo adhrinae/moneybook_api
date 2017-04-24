@@ -6,3 +6,5 @@
 
 post '/auth/sign_in', to: 'auth#sign_in'
 post '/auth/sign_up', to: 'auth#sign_up'
+
+resources :records, only: [:index, :create, :update, :destroy]
