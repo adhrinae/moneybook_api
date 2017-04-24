@@ -1,20 +1,21 @@
 require 'spec_helper'
 
 describe JwtIssuer do
-  let(:token) {
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJpc3MiOi" +
-    "Jsb2NhbGhvc3QiLCJleHAiOjg2NDAwfQ.rcsYcACaeGkCPiZsks6FJqBGhuz_QXrLNIugWjBDM8w"
-  }
-
-  it "encodes token as expected" do
-    Time.stub :now, Time.at(0) do
-      JwtIssuer.encode(1)[:auth_token].must_equal token
-    end
+  it "encodes token" do
+    JwtIssuer.encode(1)[:auth_token].wont_be_nil
   end
 
   it "decodes and returns user_id with given token" do
-    Time.stub :now, Time.at(0) do
-      JwtIssuer.decode(token)['user_id'].must_equal 1
-    end
+    token = JwtIssuer.encode(1)[:auth_token]
+    JwtIssuer.decode(token)['user_id'].must_equal 1
+  end
+
+  it "throws error with invalid token" do
+    assert_raises { JwtIssuer.decode('invalid token') }
+  end
+
+  it "expires token after given expire time" do
+    token = JwtIssuer.encode(1, 0)[:auth_token]
+    assert_raises { JwtIssuer.decode(token) }
   end
 end
