@@ -11,7 +11,8 @@ module Api::Controllers::Records
 
     def call(params)
       halt 422, 'Invalid Parameters' unless params.valid?
-      user = UserRepository.new.first
+
+      user = current_user
       amount = params.get(:record, :amount)
       description = params.get(:record, :description)
 

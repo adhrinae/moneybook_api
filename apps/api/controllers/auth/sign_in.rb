@@ -1,6 +1,7 @@
 module Api::Controllers::Auth
   class SignIn
     include Api::Action
+    include Api::Authentication::Skip
 
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
