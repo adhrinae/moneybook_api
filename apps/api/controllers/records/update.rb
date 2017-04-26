@@ -1,3 +1,5 @@
+require_relative './set_record'
+
 module Api::Controllers::Records
   class Update
     include Api::Action
