@@ -3,7 +3,6 @@ require_relative '../../../../apps/api/controllers/records/create'
 
 describe Api::Controllers::Records::Create do
   include Rack::Test::Methods
-  let(:action) { Api::Controllers::Records::Create.new }
   let(:params) { { record: { amount: 1000, description: 'Spending Money' } } }
 
   def app

@@ -1,6 +1,7 @@
 module Api::Controllers::Records
-  class Create
+  class Update
     include Api::Action
+    include SetRecord
 
     params do
       required(:record).schema do
@@ -16,17 +17,16 @@ module Api::Controllers::Records
     def call(params)
       halt 422, 'Invalid Parameters' unless params.valid?
 
-      user = current_user
-      amount = params.get(:record, :amount)
-      description = params.get(:record, :description)
-
-      record = @repo.create(
-        user_id: user.id,
-        amount: amount,
-        description: description
-      )
-
-      status 201, record.to_h.to_json
+      begin
+        updated_record = repo.update(record.id, params.get(:record))
+        status 200, updated_record.to_h.to_json
+      rescue
+        status 400, { error: 'There was a problem during the process' }.to_json
+      end
     end
+
+    private
+
+    attr_reader :repo, :record
   end
 end
