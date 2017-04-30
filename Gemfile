@@ -9,6 +9,7 @@ gem 'pg'
 # Authentication
 gem 'jwt'
 gem 'bcrypt'
+gem 'rack-cors'
 
 group :development do
   # Code reloading
